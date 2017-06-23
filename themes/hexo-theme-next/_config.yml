@@ -164,7 +164,7 @@ social_icons:
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.jpg
 # in site  directory(source/uploads): /uploads/avatar.jpg
-#avatar:
+avatar: http://orvzcuqdg.bkt.clouddn.com/20170623153051_Lp1xxg_WechatIMG2.jpeg
 
 
 # Table Of Contents in the Sidebar

@@ -1,7 +1,10 @@
 title: CoreSpotlight 学习
+tags:
+	- iOS
+	- CoreSpotlight
 categories:
 - iOS
-date: 2016/5/13 20:46:25
+date: 2016/5/13 19:46:25
 ---
 
 #简介
