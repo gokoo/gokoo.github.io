@@ -11,7 +11,7 @@ keywords: "Hexo, NexT"
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
 # Set rss to specific value if you have burned your feed already.
-rss:
+rss: 
 
 # Specify the date when the site was setup
 since: 2013
@@ -356,7 +356,7 @@ changyan:
 #google_site_verification:
 
 # Google Analytics
-#google_analytics:
+google_analytics: UA-101663260-1
 
 # Yandex Webmaster tools verification setting
 # See: https://webmaster.yandex.ru/
