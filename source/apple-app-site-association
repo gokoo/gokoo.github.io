@@ -1,0 +1,15 @@
+{
+  "applinks": {
+      "apps": [],
+      "details": [
+          {
+              "appID": "MQ7ZB3WWNR.Zhancheng.Co.Ltd.stringDemo",
+              "paths": [ "*", "/videos/wwdc/2015/*"]
+          },
+          {
+              "appID": "MQ7ZB3WWNR.Zhancheng.Co.Ltd.stringDemo",
+              "paths": [ "*" ]
+          }
+      ]
+  }
+}
