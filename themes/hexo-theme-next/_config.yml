@@ -80,8 +80,8 @@ menu_icons:
 
 # Schemes
 # scheme: Muse
-scheme: Mist
-#scheme: Pisces
+# scheme: Mist
+scheme: Pisces
 
 
 # ---------------------------------------------------------------
@@ -312,8 +312,8 @@ han: false
 
 # Disqus
 disqus:
-  enable: false
-  shortname:
+  enable: true
+  shortname: https-zhangyifei-me
   count: true
 
 # Hypercomments

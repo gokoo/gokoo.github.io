@@ -7,13 +7,13 @@ categories:
 date: 2016/5/13 19:46:25
 ---
 
-#简介
+# 简介
 &lt;CoreSpotlight&gt;是 **iOS9 / Xcode7** 提供的一组新的API来帮助你建立起你的应用中的索引。CoreSpotlight是用来处理用户数据
 要使用CoreSpotlight首先要在工程->Build Phases->Link Binary With Libraries->搜索CoreSpotlight引入Framework
 # 搜索结果的初始化以及添加
 >**CSSearchableItemAttributeSet** ：声明CSSearchableItem包含的元数据。
 
-####CSSearchableItemAttributeSet 方法 [点击此处查看效果](http://e.hiphotos.baidu.com/image/pic/item/42166d224f4a20a42adfcc5c99529822730ed06c.jpg)
+#### CSSearchableItemAttributeSet 方法 [点击此处查看效果](http://e.hiphotos.baidu.com/image/pic/item/42166d224f4a20a42adfcc5c99529822730ed06c.jpg)
 
 ```objc
 /*应用内搜索object，想搜索到多少种界面就要创建多少个set ，每个set都要对应一个item*/
@@ -31,7 +31,7 @@ date: 2016/5/13 19:46:25
 
 > **CSSearchableItem** 是CSSearchableItemAttributeSet的内容
 
-####CSSearchableItem 方法
+#### CSSearchableItem 方法
 
 ```objc
 //UniqueIdentifier每个搜索都有一个唯一标示，当用户点击搜索到得某个内容的时候，系统会调用代理方法，会将这个唯一标示传给你，以便让你确定是点击了哪一个，方便做页面跳转
@@ -63,7 +63,7 @@ date: 2016/5/13 19:46:25
 }
 ```
 
-#索引的删除
+# 索引的删除
 >CSSearchableIndex 提供了三种方法来删除索引
 
 ```objc
@@ -75,7 +75,7 @@ date: 2016/5/13 19:46:25
  - (void)deleteAllSearchableItemsWithCompletionHandler:(void (^ __nullable)(NSError * __nullable error))completionHandler; 
 ```
 
-#总结
+# 总结
 >关于CSSearchableItemAttributeSet
 
 1. contactKeywords的搜索索引，经过测试，**一段长文字spotlight可以自动模糊匹配**，比如将key设为“这是spotlight第一条搜索结果”输入“这是”、“zhes”、“第一条”···都会匹配搜索结果，key的长度没有进行验证
@@ -96,7 +96,7 @@ date: 2016/5/13 19:46:25
 
 1. 初步设想首先根据UniqueIdentifier和domainIdentifier对搜索结果进行分类，删除的时候调用CSSearchableIndex的方法统一删除，并且在插入搜索结果的工具类里进行Model屏蔽
 
-##参考文档
+## 参考文档
 [iOS 9之应用内搜索(CoreSpotlight）API - CocoonJin的博客](http://www.cnblogs.com/CocoonJin/p/4703366.html)
 [iOS 9 应用内搜索(CoreSpotlight）的使用 - 魅风追影](http://www.cnblogs.com/KingQiangzi/p/4861851.html)
 [Apple Core Spotlight 文档](https://developer.apple.com/reference/corespotlight)
