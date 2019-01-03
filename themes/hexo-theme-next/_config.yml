@@ -143,7 +143,7 @@ font:
 # Value is the target link (E.g. GitHub: https://github.com/iissnan)
 #social:
 social:
-  GitHub: https://github.com/280772270
+  GitHub: https://github.com/gokoo
   Weibo: http://weibo.com/3298504791
 
 
@@ -164,7 +164,7 @@ social_icons:
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.jpg
 # in site  directory(source/uploads): /uploads/avatar.jpg
-avatar: http://orvzcuqdg.bkt.clouddn.com/20170623153051_Lp1xxg_WechatIMG2.jpeg
+avatar: /images/avator.jpg
 
 
 # Table Of Contents in the Sidebar
@@ -313,7 +313,7 @@ han: false
 # Disqus
 disqus:
   enable: true
-  shortname: https-zhangyifei-me
+  shortname: https-yifnot-com
   count: true
 
 # Hypercomments

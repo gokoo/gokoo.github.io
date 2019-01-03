@@ -14,7 +14,7 @@ heatmap在很多领域都有应用，当然绘制heatmap也有很多种方法，
 今天我就要说一说Mac开发环境下利用R语言的pheatmap，读取excel的数据，或者生成数据绘制heatmap。
 
 首先来看看热图长什么样。
-![](http://orvzcuqdg.bkt.clouddn.com/WX20180607-091902.png)
+![](/images/WX20180607-091902.png)
 
 # 准备工作
 ## 下载R语言的安装包
@@ -26,9 +26,9 @@ heatmap在很多领域都有应用，当然绘制heatmap也有很多种方法，
 - **如果上面的看不懂就点击这里查看w3c的教程**[w3c的教程](https://www.w3cschool.cn/r/r_environment_setup.html)
 <!--more-->
 ## 分别安装成功之后运行R语言程序
-![](http://orvzcuqdg.bkt.clouddn.com/WX20180607-092819.png)
+![](/images/WX20180607-092819.png)
 
-![](http://orvzcuqdg.bkt.clouddn.com/WX20180607-092920.png)
+![](/images/WX20180607-092920.png)
 ### 第一步 配置工作目录
 使用getwd函数来显示当前工作目录，使用setwd函数改变当前目录:
 
@@ -43,7 +43,7 @@ heatmap在很多领域都有应用，当然绘制heatmap也有很多种方法，
 
 ### 第二步 加载需要的package “pheatmap”
 - Mac下，按 command + Alt + i 进入package安装界面，或者 点击menuBar packages&Data -> Package Installer 进入
-![](http://orvzcuqdg.bkt.clouddn.com/WX20180607-093546.png)
+![](/images/WX20180607-093546.png)
 
 - 安装成功提示
 ```R
@@ -140,7 +140,7 @@ Error in hclust(d, method = method) :
 > pheatmap(test, cellwidth=16, cellheight=16, fontsize= 9 ,  color= colorRampPalette(c("red","blue","orange"))(50), cluster_rows=FALSE,cluster_cols=FALSE)
 ```
 生成以下热图
-![](http://orvzcuqdg.bkt.clouddn.com/WX20180607-100326.png)
+![](/images/WX20180607-100326.png)
 
 参考资料
 - [那些年画过的热图之pheatmap美化过程](http://www.shengxin.ren/article/107)
