@@ -1,0 +1,880 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="WEEX,web,跨平台,ide,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="翼飞" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="ide的选择ide这方面我还是比较推荐Sublime Text按需求下载（失效后自行搜索）激活步骤以上都是在Mac开发环境下的配置，Windows的就不贴了 SublimeText语法高亮 首先下载—&amp;gt;配置文件 密码: d8k8 导航栏里选择Tools-&amp;gt;Developer-&amp;gt;New Syntax 打开下载的文件，复制到New Syntax新创建的文件当中，然后保存（保存的名字为">
+<meta name="keywords" content="WEEX,web,跨平台,ide">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IDE的选择和配置">
+<meta property="og:url" content="https://github.com/gokoo/gokoo.github.io.git/2016/09/13/5.ide的选择和配置/index.html">
+<meta property="og:site_name" content="翼飞">
+<meta property="og:description" content="ide的选择ide这方面我还是比较推荐Sublime Text按需求下载（失效后自行搜索）激活步骤以上都是在Mac开发环境下的配置，Windows的就不贴了 SublimeText语法高亮 首先下载—&amp;gt;配置文件 密码: d8k8 导航栏里选择Tools-&amp;gt;Developer-&amp;gt;New Syntax 打开下载的文件，复制到New Syntax新创建的文件当中，然后保存（保存的名字为">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/images/0AC5A93562319D348DA032FAFBF75CB3.png">
+<meta property="og:updated_time" content="2020-03-17T12:43:03.662Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IDE的选择和配置">
+<meta name="twitter:description" content="ide的选择ide这方面我还是比较推荐Sublime Text按需求下载（失效后自行搜索）激活步骤以上都是在Mac开发环境下的配置，Windows的就不贴了 SublimeText语法高亮 首先下载—&amp;gt;配置文件 密码: d8k8 导航栏里选择Tools-&amp;gt;Developer-&amp;gt;New Syntax 打开下载的文件，复制到New Syntax新创建的文件当中，然后保存（保存的名字为">
+<meta name="twitter:image" content="https://github.com/images/0AC5A93562319D348DA032FAFBF75CB3.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://github.com/gokoo/gokoo.github.io.git/2016/09/13/5.ide的选择和配置/">
+
+
+
+
+
+  <title>IDE的选择和配置 | 翼飞</title>
+  
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-101663260-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">翼飞</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://github.com/gokoo/gokoo.github.io.git/2016/09/13/5.ide的选择和配置/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yifeeeee">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avator.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="翼飞">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">IDE的选择和配置</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">写于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-13T18:46:25+08:00">
+                2016-09-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/WEEX/" itemprop="url" rel="index">
+                    <span itemprop="name">WEEX</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/09/13/5.ide的选择和配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/09/13/5.ide的选择和配置/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="ide的选择"><a href="#ide的选择" class="headerlink" title="ide的选择"></a>ide的选择</h2><p>ide这方面我还是比较推荐<a href="http://www.sublimetext.com/3" target="_blank" rel="noopener">Sublime Text</a>按需求下载（失效后自行搜索）<br><a href="http://www.jianshu.com/p/656b0c24141e" target="_blank" rel="noopener">激活步骤</a><br>以上都是在Mac开发环境下的配置，Windows的就不贴了</p>
+<h2 id="SublimeText语法高亮"><a href="#SublimeText语法高亮" class="headerlink" title="SublimeText语法高亮"></a>SublimeText语法高亮</h2><ol>
+<li>首先下载—&gt;<a href="https://pan.baidu.com/s/1nvdIigD" target="_blank" rel="noopener">配置文件</a> <strong>密码: d8k8</strong></li>
+<li>导航栏里选择Tools-&gt;Developer-&gt;New Syntax</li>
+<li>打开下载的文件，复制到New Syntax新创建的文件当中，然后保存（保存的名字为Plain we.sublime-syntax）</li>
+<li>打开.we文件，这时候应该就有语法高亮了</li>
+</ol>
+<h2 id="idea或者WebStrom"><a href="#idea或者WebStrom" class="headerlink" title="idea或者WebStrom"></a>idea或者WebStrom</h2><p>下面是激活码<br><a id="more"></a><br>8NGRYV8NBV-eyJsaWNlbnNlSWQiOiI4TkdSWVY4TkJWIiwibGljZW5zZWVOYW1lIjoiYWxpY2FzIGFnaWxlIiwi</p>
+<p>YXNzaWduZWVOYW1lIjoiIiwiYXNzaWduZWVFbWFpbCI6IiIsImxpY2Vuc2VSZXN0cmljdGlvbiI6</p>
+<p>IkZvciBlZHVjYXRpb25hbCB1c2Ugb25seSIsImNoZWNrQ29uY3VycmVudFVzZSI6ZmFsc2UsInBy</p>
+<p>b2R1Y3RzIjpbeyJjb2RlIjoiSUkiLCJwYWlkVXBUbyI6IjIwMTctMDUtMjEifSx7ImNvZGUiOiJB</p>
+<p>QyIsInBhaWRVcFRvIjoiMjAxNy0wNS0yMSJ9LHsiY29kZSI6IkRQTiIsInBhaWRVcFRvIjoiMjAx</p>
+<p>Ny0wNS0yMSJ9LHsiY29kZSI6IlBTIiwicGFpZFVwVG8iOiIyMDE3LTA1LTIxIn0seyJjb2RlIjoi</p>
+<p>RE0iLCJwYWlkVXBUbyI6IjIwMTctMDUtMjEifSx7ImNvZGUiOiJDTCIsInBhaWRVcFRvIjoiMjAx</p>
+<p>Ny0wNS0yMSJ9LHsiY29kZSI6IlJTMCIsInBhaWRVcFRvIjoiMjAxNy0wNS0yMSJ9LHsiY29kZSI6</p>
+<p>IlJDIiwicGFpZFVwVG8iOiIyMDE3LTA1LTIxIn0seyJjb2RlIjoiUEMiLCJwYWlkVXBUbyI6IjIw</p>
+<p>MTctMDUtMjEifSx7ImNvZGUiOiJSTSIsInBhaWRVcFRvIjoiMjAxNy0wNS0yMSJ9LHsiY29kZSI6</p>
+<p>IldTIiwicGFpZFVwVG8iOiIyMDE3LTA1LTIxIn0seyJjb2RlIjoiREIiLCJwYWlkVXBUbyI6IjIw</p>
+<p>MTctMDUtMjEifSx7ImNvZGUiOiJEQyIsInBhaWRVcFRvIjoiMjAxNy0wNS0yMSJ9XSwiaGFzaCI6</p>
+<p>IjM4MTEyNTYvMCIsImdyYWNlUGVyaW9kRGF5cyI6MCwiYXV0b1Byb2xvbmdhdGVkIjpmYWxzZSwi</p>
+<p>aXNBdXRvUHJvbG9uZ2F0ZWQiOmZhbHNlfQ==-ZkM30EtrYD1I1yfVlugRks1bv/0hs4IuraASRo3Wj0J1l+6MiR0V3aH1NTomi6bQKl3iACHpcoeg</p>
+<p>0ZAwyOpKPbCF1TrgPMvXLhFFS1D9BtaMaPdmVOY098jIwIxKs4WrtaKHJOqmvjmS64QyQW/LmTXQ</p>
+<p>J+lPNJZ81fcB8GDbc8EJfzlC5byhPiCAveZMT60lu5ZWn7jdSQTOrXZYeyPz0ZQjbI1F6yS0IGs6</p>
+<p>65NJRUBujUEGWdmpqalg1abrD/flSK1Acz4jJoxWEtad8MfqXKW3Ugo8EAGVUqlasC3yyiiD8NdJ</p>
+<p>Zx6fqMvDJTpdwlzMmeR1EV/PXmh8gd58A+3eKQ==-MIIEPjCCAiagAwIBAgIBBTANBgkqhkiG9w0BAQsFADAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENB</p>
+<p>MB4XDTE1MTEwMjA4MjE0OFoXDTE4MTEwMTA4MjE0OFowETEPMA0GA1UEAwwGcHJvZDN5MIIBIjAN</p>
+<p>BgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxcQkq+zdxlR2mmRYBPzGbUNdMN6OaXiXzxIWtMEk</p>
+<p>rJMO/5oUfQJbLLuMSMK0QHFmaI37WShyxZcfRCidwXjot4zmNBKnlyHodDij/78TmVqFl8nOeD5+</p>
+<p>07B8VEaIu7c3E1N+e1doC6wht4I4+IEmtsPAdoaj5WCQVQbrI8KeT8M9VcBIWX7fD0fhexfg3ZRt</p>
+<p>0xqwMcXGNp3DdJHiO0rCdU+Itv7EmtnSVq9jBG1usMSFvMowR25mju2JcPFp1+I4ZI+FqgR8gyG8</p>
+<p>oiNDyNEoAbsR3lOpI7grUYSvkB/xVy/VoklPCK2h0f0GJxFjnye8NT1PAywoyl7RmiAVRE/EKwID</p>
+<p>AQABo4GZMIGWMAkGA1UdEwQCMAAwHQYDVR0OBBYEFGEpG9oZGcfLMGNBkY7SgHiMGgTcMEgGA1Ud</p>
+<p>IwRBMD+AFKOetkhnQhI2Qb1t4Lm0oFKLl/GzoRykGjAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENB</p>
+<p>ggkA0myxg7KDeeEwEwYDVR0lBAwwCgYIKwYBBQUHAwEwCwYDVR0PBAQDAgWgMA0GCSqGSIb3DQEB</p>
+<p>CwUAA4ICAQC9WZuYgQedSuOc5TOUSrRigMw4/+wuC5EtZBfvdl4HT/8vzMW/oUlIP4YCvA0XKyBa</p>
+<p>CJ2iX+ZCDKoPfiYXiaSiH+HxAPV6J79vvouxKrWg2XV6ShFtPLP+0gPdGq3x9R3+kJbmAm8w+FOd</p>
+<p>lWqAfJrLvpzMGNeDU14YGXiZ9bVzmIQbwrBA+c/F4tlK/DV07dsNExihqFoibnqDiVNTGombaU2d</p>
+<p>Dup2gwKdL81ua8EIcGNExHe82kjF4zwfadHk3bQVvbfdAwxcDy4xBjs3L4raPLU3yenSzr/OEur1</p>
+<p>+jfOxnQSmEcMXKXgrAQ9U55gwjcOFKrgOxEdek/Sk1VfOjvS+nuM4eyEruFMfaZHzoQiuw4IqgGc</p>
+<p>45ohFH0UUyjYcuFxxDSU9lMCv8qdHKm+wnPRb0l9l5vXsCBDuhAGYD6ss+Ga+aDY6f/qXZuUCEUO</p>
+<p>H3QUNbbCUlviSz6+GiRnt1kA9N2Qachl+2yBfaqUqr8h7Z2gsx5LcIf5kYNsqJ0GavXTVyWh7PYi</p>
+<p>KX4bs354ZQLUwwa/cG++2+wNWP+HtBhVxMRNTdVhSm38AknZlD+PTAsWGu9GyLmhti2EnVwGybSD</p>
+<p>2Dxmhxk3IPCkhKAK+pl0eWYGZWG3tJ9mZ7SowcXLWDFAk0lRJnKGFMTggrWjV8GYpw5bq23VmIqq</p>
+<p>DLgkNzuoog==</p>
+<h2 id="语法高亮"><a href="#语法高亮" class="headerlink" title="语法高亮"></a>语法高亮</h2><p><img src="/images/0AC5A93562319D348DA032FAFBF75CB3.png" alt=""></p>
+<p>原理就是把 *.we 的文件识别成HTML同样也可以语法高亮，idea有一个民间大神开发的weex插件，可以在右侧直接预览效果以及快速生成当前页面的二维码，蛮不错。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/WEEX/" rel="tag"># WEEX</a>
+          
+            <a href="/tags/web/" rel="tag"># web</a>
+          
+            <a href="/tags/跨平台/" rel="tag"># 跨平台</a>
+          
+            <a href="/tags/ide/" rel="tag"># ide</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/13/4.了解工程/" rel="next" title="了解工程">
+                <i class="fa fa-chevron-left"></i> 了解工程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/01/bit/" rel="prev" title="比特币白皮书学习笔记">
+                比特币白皮书学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avator.jpg" alt="yifeeeee">
+          <p class="site-author-name" itemprop="name">yifeeeee</p>
+           
+              <p class="site-description motion-element" itemprop="description">blog挂在GitHub上，速度有些慢，改天迁移到自己的服务器上</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/gokoo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3298504791" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ide的选择"><span class="nav-number">1.</span> <span class="nav-text">ide的选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SublimeText语法高亮"><span class="nav-number">2.</span> <span class="nav-text">SublimeText语法高亮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#idea或者WebStrom"><span class="nav-number">3.</span> <span class="nav-text">idea或者WebStrom</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语法高亮"><span class="nav-number">4.</span> <span class="nav-text">语法高亮</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2013 - 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yifeeeee</span>
+</div>
+
+
+<div class="powered-by">
+   <a class="theme-link" href="https://hexo.io">Hexo</a> 
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://https-yifnot-com.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://github.com/gokoo/gokoo.github.io.git/2016/09/13/5.ide的选择和配置/';
+          this.page.identifier = '2016/09/13/5.ide的选择和配置/';
+          this.page.title = 'IDE的选择和配置';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-yifnot-com.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

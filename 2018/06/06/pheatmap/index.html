@@ -1,0 +1,936 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="R,heatmap,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="翼飞" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="Mac系统下R语言下利用pheatmap绘制热图的教程heatmap在很多领域都有应用，当然绘制heatmap也有很多种方法，MATLAB，PS，Excel以及各种脚本语言，比如Python，JavaScript，R语言。 今天我就要说一说Mac开发环境下利用R语言的pheatmap，读取excel的数据，或者生成数据绘制heatmap。 首先来看看热图长什么样。 准备工作下载R语言的安装包点击进">
+<meta name="keywords" content="R,heatmap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="R语言下的pheatmap绘制热图">
+<meta property="og:url" content="https://github.com/gokoo/gokoo.github.io.git/2018/06/06/pheatmap/index.html">
+<meta property="og:site_name" content="翼飞">
+<meta property="og:description" content="Mac系统下R语言下利用pheatmap绘制热图的教程heatmap在很多领域都有应用，当然绘制heatmap也有很多种方法，MATLAB，PS，Excel以及各种脚本语言，比如Python，JavaScript，R语言。 今天我就要说一说Mac开发环境下利用R语言的pheatmap，读取excel的数据，或者生成数据绘制heatmap。 首先来看看热图长什么样。 准备工作下载R语言的安装包点击进">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/images/WX20180607-091902.png">
+<meta property="og:image" content="https://github.com/images/WX20180607-092819.png">
+<meta property="og:image" content="https://github.com/images/WX20180607-092920.png">
+<meta property="og:image" content="https://github.com/images/WX20180607-093546.png">
+<meta property="og:image" content="https://github.com/images/WX20180607-100326.png">
+<meta property="og:updated_time" content="2020-03-17T12:43:03.664Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="R语言下的pheatmap绘制热图">
+<meta name="twitter:description" content="Mac系统下R语言下利用pheatmap绘制热图的教程heatmap在很多领域都有应用，当然绘制heatmap也有很多种方法，MATLAB，PS，Excel以及各种脚本语言，比如Python，JavaScript，R语言。 今天我就要说一说Mac开发环境下利用R语言的pheatmap，读取excel的数据，或者生成数据绘制heatmap。 首先来看看热图长什么样。 准备工作下载R语言的安装包点击进">
+<meta name="twitter:image" content="https://github.com/images/WX20180607-091902.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://github.com/gokoo/gokoo.github.io.git/2018/06/06/pheatmap/">
+
+
+
+
+
+  <title>R语言下的pheatmap绘制热图 | 翼飞</title>
+  
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-101663260-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">翼飞</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://github.com/gokoo/gokoo.github.io.git/2018/06/06/pheatmap/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yifeeeee">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avator.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="翼飞">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">R语言下的pheatmap绘制热图</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">写于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-06T18:15:25+08:00">
+                2018-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/R/" itemprop="url" rel="index">
+                    <span itemprop="name">R</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/06/pheatmap/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/06/06/pheatmap/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Mac系统下R语言下利用pheatmap绘制热图的教程"><a href="#Mac系统下R语言下利用pheatmap绘制热图的教程" class="headerlink" title="Mac系统下R语言下利用pheatmap绘制热图的教程"></a>Mac系统下R语言下利用pheatmap绘制热图的教程</h1><p>heatmap在很多领域都有应用，当然绘制heatmap也有很多种方法，MATLAB，PS，Excel以及各种脚本语言，比如Python，JavaScript，R语言。</p>
+<p>今天我就要说一说Mac开发环境下利用R语言的pheatmap，读取excel的数据，或者生成数据绘制heatmap。</p>
+<p>首先来看看热图长什么样。<br><img src="/images/WX20180607-091902.png" alt=""></p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><h2 id="下载R语言的安装包"><a href="#下载R语言的安装包" class="headerlink" title="下载R语言的安装包"></a>下载R语言的安装包</h2><p><a href="https://www.r-project.org" target="_blank" rel="noopener">点击进入R语言下载界面</a></p>
+<ul>
+<li>点击download R。<a href="https://cran.r-project.org/mirrors.html" target="_blank" rel="noopener">download R</a></li>
+<li>然后选择适合自己的CDN，在中国就选择清华的 <a href="https://mirrors.ustc.edu.cn/CRAN/" target="_blank" rel="noopener">清华CDN下载界面</a></li>
+<li>选择适合你系统的R语言安装包。<a href="https://mirrors.ustc.edu.cn/CRAN/bin/linux/" target="_blank" rel="noopener">Linux</a>.<a href="https://mirrors.ustc.edu.cn/CRAN/bin/windows/" target="_blank" rel="noopener">Windows</a>.<a href="https://mirrors.ustc.edu.cn/CRAN/bin/macosx/" target="_blank" rel="noopener">Mac</a></li>
+<li><strong>如果上面的看不懂就点击这里查看w3c的教程</strong><a href="https://www.w3cschool.cn/r/r_environment_setup.html" target="_blank" rel="noopener">w3c的教程</a><a id="more"></a>
+<h2 id="分别安装成功之后运行R语言程序"><a href="#分别安装成功之后运行R语言程序" class="headerlink" title="分别安装成功之后运行R语言程序"></a>分别安装成功之后运行R语言程序</h2><img src="/images/WX20180607-092819.png" alt=""></li>
+</ul>
+<p><img src="/images/WX20180607-092920.png" alt=""></p>
+<h3 id="第一步-配置工作目录"><a href="#第一步-配置工作目录" class="headerlink" title="第一步 配置工作目录"></a>第一步 配置工作目录</h3><p>使用getwd函数来显示当前工作目录，使用setwd函数改变当前目录:</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; getwd()</span><br><span class="line">[<span class="number">1</span>] <span class="string">"/Users/zhangyifei"</span></span><br><span class="line">&gt; setwd(<span class="string">"~/Documents"</span>)</span><br><span class="line">&gt; getwd()</span><br><span class="line">[<span class="number">1</span>] <span class="string">"/Users/zhangyifei/Documents"</span></span><br></pre></td></tr></table></figure>
+<p>成功把工作目录设置为 <em>~/Documents</em> 文件夹下</p>
+<h3 id="第二步-加载需要的package-“pheatmap”"><a href="#第二步-加载需要的package-“pheatmap”" class="headerlink" title="第二步 加载需要的package “pheatmap”"></a>第二步 加载需要的package “pheatmap”</h3><ul>
+<li><p>Mac下，按 command + Alt + i 进入package安装界面，或者 点击menuBar packages&amp;Data -&gt; Package Installer 进入<br><img src="/images/WX20180607-093546.png" alt=""></p>
+</li>
+<li><p>安装成功提示</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">下载的二进制程序包在</span><br><span class="line">	/var/folders/1j/r1v7hrln35b3c5srf63wbjl80000gn/<span class="literal">T</span>//Rtmpn6zgWr/downloaded_packages里</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>尝试引入pheatmap，然后继续安装其他所需的package</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">library</span>(pheatmap)</span><br><span class="line">错误: package or namespace load failed <span class="keyword">for</span> ‘pheatmap’ <span class="keyword">in</span> loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]):</span><br><span class="line"> 不存在叫‘gtable’这个名字的程辑包</span><br><span class="line">试开URL’https://mirrors.eliteu.cn/CRAN/bin/macosx/el-capitan/contrib/<span class="number">3.5</span>/gtable_0.2.0.tgz<span class="string">'</span></span><br><span class="line"><span class="string">Content type '</span>application/x-gzip<span class="string">' length 85683 bytes (83 KB)</span></span><br><span class="line"><span class="string">==================================================</span></span><br><span class="line"><span class="string">downloaded 83 KB</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>提示 缺少 <strong>gtable</strong> 这个安装包，继续在package Installer 搜索并安装</p>
+</li>
+<li>继续使用 &gt; library(pheatmap) ，直到没有错误，完成pheatmap的安装。</li>
+</ul>
+<h3 id="初次使用pheatmap-pheatmap文档-百度文库"><a href="#初次使用pheatmap-pheatmap文档-百度文库" class="headerlink" title="初次使用pheatmap pheatmap文档-百度文库"></a>初次使用pheatmap <a href="https://wenku.baidu.com/view/aa1f3b45336c1eb91a375d71.html" target="_blank" rel="noopener">pheatmap文档-百度文库</a></h3><ul>
+<li><p>首先运行一下代码，造出一些虚拟数据</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建数据集test测试矩阵  </span></span><br><span class="line">test = matrix(rnorm(<span class="number">200</span>), <span class="number">20</span>, <span class="number">10</span>)  </span><br><span class="line">test[<span class="number">1</span>:<span class="number">10</span>, seq(<span class="number">1</span>, <span class="number">10</span>, <span class="number">2</span>)] = test[<span class="number">1</span>:<span class="number">10</span>, seq(<span class="number">1</span>, <span class="number">10</span>, <span class="number">2</span>)] + <span class="number">3</span>  </span><br><span class="line">test[<span class="number">11</span>:<span class="number">20</span>, seq(<span class="number">2</span>, <span class="number">10</span>, <span class="number">2</span>)] = test[<span class="number">11</span>:<span class="number">20</span>, seq(<span class="number">2</span>, <span class="number">10</span>, <span class="number">2</span>)] + <span class="number">2</span>  </span><br><span class="line">test[<span class="number">15</span>:<span class="number">20</span>, seq(<span class="number">2</span>, <span class="number">10</span>, <span class="number">2</span>)] = test[<span class="number">15</span>:<span class="number">20</span>, seq(<span class="number">2</span>, <span class="number">10</span>, <span class="number">2</span>)] + <span class="number">4</span>  </span><br><span class="line">colnames(test) = paste(<span class="string">"Test"</span>, <span class="number">1</span>:<span class="number">10</span>, sep = <span class="string">""</span>)  </span><br><span class="line">rownames(test) = paste(<span class="string">"Gene"</span>, <span class="number">1</span>:<span class="number">20</span>, sep = <span class="string">""</span>)</span><br><span class="line"><span class="comment"># print查看虚拟数据的表格</span></span><br><span class="line">&gt; print(test)</span><br><span class="line">             Test1      Test2       Test3       Test4       Test5       Test6       Test7      Test8      Test9     Test10</span><br><span class="line">Gene1   <span class="number">4.16565797</span> -<span class="number">0.5332217</span>  <span class="number">2.75177432</span>  <span class="number">0.09050091</span>  <span class="number">2.92299796</span> -<span class="number">0.03065525</span>  <span class="number">3.25369007</span>  <span class="number">1.6498609</span>  <span class="number">5.5140122</span> -<span class="number">0.6128477</span></span><br><span class="line">Gene2   <span class="number">2.92359811</span>  <span class="number">0.8752739</span>  <span class="number">3.66345374</span> -<span class="number">1.50312709</span>  <span class="number">4.18093373</span> -<span class="number">0.98068132</span>  <span class="number">2.45325663</span> -<span class="number">0.2559521</span>  <span class="number">2.6452355</span>  <span class="number">0.9482075</span></span><br><span class="line">Gene3   <span class="number">2.57691541</span>  <span class="number">0.5655297</span>  <span class="number">3.67327715</span> -<span class="number">1.16676176</span>  <span class="number">2.86796233</span>  <span class="number">0.84392770</span>  <span class="number">1.58980797</span> -<span class="number">0.4452452</span>  <span class="number">4.5591699</span> -<span class="number">0.3777792</span></span><br><span class="line">Gene4   <span class="number">2.20998817</span> -<span class="number">0.6476140</span>  <span class="number">1.82619478</span>  <span class="number">0.20842503</span>  <span class="number">5.61892487</span>  <span class="number">2.72355157</span>  <span class="number">2.62418152</span> -<span class="number">1.4968677</span>  <span class="number">0.6739014</span> -<span class="number">0.5288066</span></span><br><span class="line">Gene5   <span class="number">2.38652479</span>  <span class="number">0.9312714</span>  <span class="number">2.54595175</span>  <span class="number">1.14883361</span>  <span class="number">3.20331623</span> -<span class="number">0.09334568</span>  <span class="number">3.07390285</span>  <span class="number">0.3063662</span>  <span class="number">3.1054117</span>  <span class="number">1.2705683</span></span><br><span class="line">Gene6   <span class="number">2.39478774</span> -<span class="number">1.1261661</span>  <span class="number">3.03025086</span>  <span class="number">1.01563976</span>  <span class="number">2.52318186</span>  <span class="number">0.84812055</span>  <span class="number">3.27005713</span> -<span class="number">0.8367966</span>  <span class="number">1.4205975</span> -<span class="number">0.1367932</span></span><br><span class="line">Gene7   <span class="number">2.62131968</span>  <span class="number">0.6992899</span>  <span class="number">2.25204510</span>  <span class="number">1.34989987</span>  <span class="number">2.97693639</span>  <span class="number">0.30943294</span>  <span class="number">3.27633509</span>  <span class="number">0.1267961</span>  <span class="number">2.2810863</span> -<span class="number">1.2900047</span></span><br><span class="line">Gene8   <span class="number">3.58112235</span>  <span class="number">0.4807381</span>  <span class="number">1.62681774</span> -<span class="number">0.33562825</span>  <span class="number">4.40921772</span> -<span class="number">0.48509264</span>  <span class="number">2.03981473</span> -<span class="number">1.2606898</span>  <span class="number">3.6922420</span> -<span class="number">0.6446854</span></span><br><span class="line">Gene9   <span class="number">0.99267891</span> -<span class="number">1.2629488</span>  <span class="number">2.06609587</span> -<span class="number">0.21681098</span>  <span class="number">1.96182398</span> -<span class="number">1.41969859</span>  <span class="number">3.31023690</span>  <span class="number">0.2180971</span>  <span class="number">2.9437715</span> -<span class="number">0.3806902</span></span><br><span class="line">Gene10  <span class="number">4.12715661</span> -<span class="number">0.2136322</span>  <span class="number">4.62205045</span> -<span class="number">2.32553157</span>  <span class="number">3.64262245</span>  <span class="number">0.02360678</span>  <span class="number">2.00265816</span>  <span class="number">0.4206732</span>  <span class="number">3.1467020</span>  <span class="number">2.1769087</span></span><br><span class="line">Gene11 -<span class="number">0.09215522</span>  <span class="number">1.1265504</span>  <span class="number">1.38731747</span>  <span class="number">1.85485547</span>  <span class="number">0.99736984</span>  <span class="number">1.34063368</span>  <span class="number">0.28087822</span>  <span class="number">1.0977324</span> -<span class="number">1.0247692</span>  <span class="number">2.8091086</span></span><br><span class="line">Gene12  <span class="number">0.18625357</span>  <span class="number">4.7773888</span> -<span class="number">0.08486060</span>  <span class="number">2.58186479</span> -<span class="number">0.78182003</span>  <span class="number">1.90266287</span>  <span class="number">1.00209123</span>  <span class="number">1.4110036</span>  <span class="number">0.1093483</span>  <span class="number">1.3953864</span></span><br><span class="line">Gene13 -<span class="number">1.16239850</span>  <span class="number">1.3965048</span>  <span class="number">0.09446052</span>  <span class="number">0.87578260</span> -<span class="number">1.26780043</span>  <span class="number">2.82916652</span> -<span class="number">0.05420670</span>  <span class="number">0.5785381</span>  <span class="number">0.7610233</span>  <span class="number">1.2991690</span></span><br><span class="line">Gene14  <span class="number">0.43790594</span>  <span class="number">2.0389307</span>  <span class="number">1.25732857</span>  <span class="number">3.32854010</span> -<span class="number">0.33689596</span>  <span class="number">2.32263273</span>  <span class="number">1.68448694</span>  <span class="number">0.1837919</span>  <span class="number">0.1148969</span>  <span class="number">1.5774761</span></span><br><span class="line">Gene15 -<span class="number">0.78805795</span>  <span class="number">5.6452089</span>  <span class="number">1.16313071</span>  <span class="number">6.54379640</span> -<span class="number">0.22959185</span>  <span class="number">5.15790036</span> -<span class="number">1.34789990</span>  <span class="number">5.8514132</span> -<span class="number">0.9923669</span>  <span class="number">5.2847863</span></span><br><span class="line">Gene16  <span class="number">2.08792577</span>  <span class="number">5.4574904</span>  <span class="number">0.56437760</span>  <span class="number">5.37730138</span> -<span class="number">0.68379768</span>  <span class="number">4.66291839</span>  <span class="number">0.52126695</span>  <span class="number">6.1721846</span>  <span class="number">0.5563628</span>  <span class="number">7.0962682</span></span><br><span class="line">Gene17  <span class="number">0.05124655</span>  <span class="number">6.3967121</span>  <span class="number">1.01852622</span>  <span class="number">5.82298443</span> -<span class="number">0.81731000</span>  <span class="number">6.35169540</span>  <span class="number">0.01920213</span>  <span class="number">6.0312737</span> -<span class="number">0.7635853</span>  <span class="number">6.6401004</span></span><br><span class="line">Gene18 -<span class="number">0.31987851</span>  <span class="number">6.7682519</span> -<span class="number">0.80230549</span>  <span class="number">4.38410875</span>  <span class="number">0.03526136</span>  <span class="number">7.48838461</span>  <span class="number">1.57151778</span>  <span class="number">6.5473611</span> -<span class="number">2.5019644</span>  <span class="number">4.7268250</span></span><br><span class="line">Gene19  <span class="number">0.68443755</span>  <span class="number">6.3221438</span>  <span class="number">0.55006319</span>  <span class="number">5.22758579</span>  <span class="number">0.11115899</span>  <span class="number">6.58952720</span> -<span class="number">1.62195280</span>  <span class="number">6.4833998</span> -<span class="number">0.5872461</span>  <span class="number">5.5101095</span></span><br><span class="line">Gene20  <span class="number">0.96231309</span>  <span class="number">5.4082046</span>  <span class="number">0.39004366</span>  <span class="number">4.86237392</span>  <span class="number">0.65172133</span>  <span class="number">5.90754631</span>  <span class="number">1.10989981</span>  <span class="number">4.5998277</span> -<span class="number">0.3509650</span>  <span class="number">5.4079388</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行&gt;pheatmap(test),绘制以test为数据的热图</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; pheatmap(test)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>以上就能生成文章开始的标准热图了</p>
+</li>
+</ul>
+<h3 id="读取excel的数据，并绘制热图"><a href="#读取excel的数据，并绘制热图" class="headerlink" title="读取excel的数据，并绘制热图"></a>读取excel的数据，并绘制热图</h3><ul>
+<li>安装 <strong>readxl</strong> </li>
+<li><p>读取工作目录下data.xlsx文件 命名为 data</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; data &lt;- read_excel(<span class="string">"data.xlsx"</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用pheatmap，绘制标准热图</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; pheatmap(data)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果出现一下错误是因为图表绘制的有问题</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Error <span class="keyword">in</span> hclust(d, method = method) : </span><br><span class="line">  外接函数调用时不能有<span class="literal">NA</span>/<span class="literal">NaN</span>/<span class="literal">Inf</span>(arg11)</span><br><span class="line">此外: Warning messages:</span><br><span class="line"><span class="number">1</span>: In dist(mat, method = distance) : 强制改变过程中产生了<span class="literal">NA</span></span><br><span class="line"><span class="number">2</span>: In dist(mat, method = distance) : 强制改变过程中产生了<span class="literal">NA</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="pheatmap的参数以及功能"><a href="#pheatmap的参数以及功能" class="headerlink" title="pheatmap的参数以及功能"></a>pheatmap的参数以及功能</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>值</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cellwidth</td>
+<td>16</td>
+<td>方格宽度</td>
+</tr>
+<tr>
+<td>cellheight</td>
+<td>16</td>
+<td>方格高度</td>
+</tr>
+<tr>
+<td>fontsize</td>
+<td>9</td>
+<td>文字大小</td>
+</tr>
+<tr>
+<td>color</td>
+<td></td>
+<td>方格的颜色</td>
+</tr>
+<tr>
+<td>cluster_rows</td>
+<td>TRUE/FALSE</td>
+<td>是否显示行的关系树</td>
+</tr>
+<tr>
+<td>cluster_cols</td>
+<td>TRUE/FALSE</td>
+<td>是否显示列的关系树</td>
+</tr>
+<tr>
+<td>legend</td>
+<td>TRUE/FALSE</td>
+<td>是否显示图例</td>
+</tr>
+</tbody>
+</table>
+<p>示例代码<br><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; pheatmap(test, cellwidth=<span class="number">16</span>, cellheight=<span class="number">16</span>, fontsize= <span class="number">9</span> ,  color= colorRampPalette(c(<span class="string">"red"</span>,<span class="string">"blue"</span>,<span class="string">"orange"</span>))(<span class="number">50</span>), cluster_rows=<span class="literal">FALSE</span>,cluster_cols=<span class="literal">FALSE</span>)</span><br></pre></td></tr></table></figure></p>
+<p>生成以下热图<br><img src="/images/WX20180607-100326.png" alt=""></p>
+<p>参考资料</p>
+<ul>
+<li><a href="http://www.shengxin.ren/article/107" target="_blank" rel="noopener">那些年画过的热图之pheatmap美化过程</a></li>
+<li><a href="https://blog.csdn.net/qazplm12_3/article/details/74516312" target="_blank" rel="noopener">R绘制热图</a></li>
+<li><a href="http://www.itkeyword.com/doc/5292364481458865620/pheatmap-error-error-in-hclustd-method-method-na-nan-inf-in-foreign-funct" target="_blank" rel="noopener">解决r - Pheatmap error Error in hclust(d, method = method) : NA/NaN/Inf in foreign function call (arg 11)</a></li>
+<li><a href="https://blog.csdn.net/sinat_38163598/article/details/72770404" target="_blank" rel="noopener">R语言绘制热图——pheatmap</a></li>
+<li><a href="https://www.w3cschool.cn/r/r_basic_syntax.html" target="_blank" rel="noopener">R语言教程</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/R/" rel="tag"># R</a>
+          
+            <a href="/tags/heatmap/" rel="tag"># heatmap</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/04/showAnyThing/" rel="next" title="push anything 挖坑">
+                <i class="fa fa-chevron-left"></i> push anything 挖坑
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avator.jpg" alt="yifeeeee">
+          <p class="site-author-name" itemprop="name">yifeeeee</p>
+           
+              <p class="site-description motion-element" itemprop="description">blog挂在GitHub上，速度有些慢，改天迁移到自己的服务器上</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/gokoo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3298504791" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mac系统下R语言下利用pheatmap绘制热图的教程"><span class="nav-number">1.</span> <span class="nav-text">Mac系统下R语言下利用pheatmap绘制热图的教程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#准备工作"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载R语言的安装包"><span class="nav-number">2.1.</span> <span class="nav-text">下载R语言的安装包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分别安装成功之后运行R语言程序"><span class="nav-number">2.2.</span> <span class="nav-text">分别安装成功之后运行R语言程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步-配置工作目录"><span class="nav-number">2.2.1.</span> <span class="nav-text">第一步 配置工作目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步-加载需要的package-“pheatmap”"><span class="nav-number">2.2.2.</span> <span class="nav-text">第二步 加载需要的package “pheatmap”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初次使用pheatmap-pheatmap文档-百度文库"><span class="nav-number">2.2.3.</span> <span class="nav-text">初次使用pheatmap pheatmap文档-百度文库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取excel的数据，并绘制热图"><span class="nav-number">2.2.4.</span> <span class="nav-text">读取excel的数据，并绘制热图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pheatmap的参数以及功能"><span class="nav-number">2.2.5.</span> <span class="nav-text">pheatmap的参数以及功能</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2013 - 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yifeeeee</span>
+</div>
+
+
+<div class="powered-by">
+   <a class="theme-link" href="https://hexo.io">Hexo</a> 
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://https-yifnot-com.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://github.com/gokoo/gokoo.github.io.git/2018/06/06/pheatmap/';
+          this.page.identifier = '2018/06/06/pheatmap/';
+          this.page.title = 'R语言下的pheatmap绘制热图';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-yifnot-com.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
