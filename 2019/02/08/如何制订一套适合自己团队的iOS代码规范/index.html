@@ -1,0 +1,876 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="iOS,思考,代码规范,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="翼飞" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="引言如果团队成员的编码规范各不相同，那么你在接收其他人的代码时是不是总会因为无法认同他的代码风格，而想着去重写呢。但是重写这个事儿不只会增加梳理逻辑和开发成本，而且重写后出现问题的风险也会相应增加。那么，这个问题应该如何解决呢? 在我看来，如果出现这种情况，你的团队急需制定出一套适合自己团队的编码规范。有了统一的编码规范， 就能有效避免团队成员由于代码风格不一致而导致的相互认同感缺失问题。 那么，">
+<meta name="keywords" content="iOS,思考,代码规范">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于制定团队iOS代码规范以及Code Review的思考">
+<meta property="og:url" content="https://github.com/gokoo/gokoo.github.io.git/2019/02/08/如何制订一套适合自己团队的iOS代码规范/index.html">
+<meta property="og:site_name" content="翼飞">
+<meta property="og:description" content="引言如果团队成员的编码规范各不相同，那么你在接收其他人的代码时是不是总会因为无法认同他的代码风格，而想着去重写呢。但是重写这个事儿不只会增加梳理逻辑和开发成本，而且重写后出现问题的风险也会相应增加。那么，这个问题应该如何解决呢? 在我看来，如果出现这种情况，你的团队急需制定出一套适合自己团队的编码规范。有了统一的编码规范， 就能有效避免团队成员由于代码风格不一致而导致的相互认同感缺失问题。 那么，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-23T12:42:26.006Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于制定团队iOS代码规范以及Code Review的思考">
+<meta name="twitter:description" content="引言如果团队成员的编码规范各不相同，那么你在接收其他人的代码时是不是总会因为无法认同他的代码风格，而想着去重写呢。但是重写这个事儿不只会增加梳理逻辑和开发成本，而且重写后出现问题的风险也会相应增加。那么，这个问题应该如何解决呢? 在我看来，如果出现这种情况，你的团队急需制定出一套适合自己团队的编码规范。有了统一的编码规范， 就能有效避免团队成员由于代码风格不一致而导致的相互认同感缺失问题。 那么，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://github.com/gokoo/gokoo.github.io.git/2019/02/08/如何制订一套适合自己团队的iOS代码规范/">
+
+
+
+
+
+  <title>关于制定团队iOS代码规范以及Code Review的思考 | 翼飞</title>
+  
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-101663260-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">翼飞</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://github.com/gokoo/gokoo.github.io.git/2019/02/08/如何制订一套适合自己团队的iOS代码规范/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yifeeeee">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avator.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="翼飞">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">关于制定团队iOS代码规范以及Code Review的思考</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">写于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-08T23:22:05+08:00">
+                2019-02-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/思考/" itemprop="url" rel="index">
+                    <span itemprop="name">思考</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/08/如何制订一套适合自己团队的iOS代码规范/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/08/如何制订一套适合自己团队的iOS代码规范/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>如果团队成员的编码规范各不相同，那么你在接收其他人的代码时是不是总会因为无法认同他的代码风格，而想着去重写呢。但是重写这个事儿不只会增加梳理逻辑和开发成本，而且重写后出现问题的风险也会相应增加。那么，这个问题应该如何解决呢?</p>
+<p>在我看来，如果出现这种情况，你的团队急需制定出一套适合自己团队的编码规范。有了统一的编码规范， 就能有效避免团队成员由于代码风格不一致而导致的相互认同感缺失问题。</p>
+<p>那么，如何制定编码规范呢?在接下来的内容里，我会先说，我认为的好的编码规范。在制定编码规范时，也可以按照这个思路去细化出更多、更适合自己的规范，从而制定出团队的编码规范。然后如何通过Code Review的方式将制定的编码规范进行落地。</p>
+<h1 id="好的代码规范"><a href="#好的代码规范" class="headerlink" title="好的代码规范"></a>好的代码规范</h1><p>关于好的代码规范，接下来我会从常量、变量、属性、条件语句、循环语句、函数、类，以及分类这8个方面一一说明。<br><a id="more"></a></p>
+<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><p>在常量的使用上，我建议你要尽量使用类型常量，而不是使用宏定义。比如，要定义一个字符串常量，可以写成:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> NSString * <span class="keyword">const</span> STMProjectName = @<span class="string">"GCDFetchFeed"</span></span><br></pre></td></tr></table></figure>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>对于变量来说，我认为好的编码习惯是:</p>
+<ol>
+<li>变量名应该可以明确体现出功能，最好再加上类型做后缀。这样也就明确了每个变量都是做什么的，而不是把一个变量当作不同的值用在不同的地方。</li>
+<li>在使用之前，需要先对变量做初始化，并且初始化的地方离使用它的地方越近越好。 </li>
+<li>不要滥用全局变量，尽量少用它来传递值，通过参数传值可以减少功能模块间的耦合。</li>
+</ol>
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><p>在iOS开发中，关于属性的编码规范，需要针对开发语言做区分:</p>
+<ul>
+<li>Objective-C 里的属性，要尽量通过 get 方法来进行懒加载，以避免无用的内存占用和多余的计算。 </li>
+<li>Swift 的计算属性如果是只读，可以省掉 get 子句。</li>
+</ul>
+<h2 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h2><p>在条件语句中，需要考虑到条件语句中可能涉及的所有分支条件，对于每个分支条件都需要考虑到，并进行处理，减少或不使用默认处理。特别是使用Switch处理枚举时，不要有default分支。</p>
+<p>在iOS开发中，你使用 Swift 语言编写Switch语句时，如果不加default分支的话，当枚举有新增值时，编译器会提醒你增加分支处理。这样，就可以有效避免分支漏处理的情况。</p>
+<p>另外，条件语句的嵌套分支不宜过多，可以充分利用 Swift中的guard语法。比如，这一段处理登录的示例代码:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> let userName = login.userNameOK &#123;</span><br><span class="line">    <span class="keyword">if</span> let password = login.passwordOK &#123;</span><br><span class="line">    <span class="comment">// 登录处理 ...</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        fatalError(<span class="string">"login wrong"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    fatalError(<span class="string">"login wrong"</span>) </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面这段代码表示的是，当用户名和密码都没有问题时再进行登录处理。那么，我们使用guard语法时，可以改写如下:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">guard</span></span><br><span class="line">    <span class="keyword">let</span> userName = login.userNameOK, </span><br><span class="line">    <span class="keyword">let</span> password = login.passwordOK, </span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">fatalError</span>(<span class="string">"login wrong"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 登录处理</span></span><br></pre></td></tr></table></figure></p>
+<p>可以看到，改写后的代码更易读了，异常处理都在一个区域，guard 语句真正起到了守卫的职责。而且一旦声明了guard，编译器就会强制你去处理异常，否则就会报错。异常处理越完善，代码就会越健壮。所以，条件语句的嵌套处理，可以考虑使用guard语法。</p>
+<h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><p>在循环语句中，我们应该尽量少地使用continue和break，同样可以使用guard语法来解决这个问题。解决方法是:所有需要continue和break的地方统一使用guard去处理，将所有异常都放到一处。这样做的好处是，在维护的时候方便逻辑阅读，使得代码更加易读和易于理解。</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>对于函数来说，体积不宜过大，最好控制在百行代码以内。如果函数内部逻辑多，我们可以将复杂逻辑分解成多个小逻辑，并将每个小逻辑提取出来作为一个单独的函数。每个函数处理最小单位的逻辑，然后一层一 层往上组合。<br>这样，我们就可以通过函数名明确那段逻辑处理的目的，提高代码的可读性。<br>拆分成多个逻辑简单的函数后，我们需要注意的是，要对函数的入参进行验证，guard 语法同样适用于检查入参。比如下面的这个函数:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">func <span class="title">saveRSS</span><span class="params">(rss: RSS?, store: Store?)</span> </span>&#123; </span><br><span class="line">    guard let rss = rss <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line">    &#125;</span><br><span class="line">    guard let store = store <span class="keyword">else</span> &#123; </span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="comment">// 保存 RSS</span></span><br><span class="line">    <span class="keyword">return</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>另外，函数内尽量避免使用全局变量来传递数据，使用参数或者局部变量传递数据能够减少函数对外部的依赖，减少耦合，提高函数的独立性，提高单元测试的准确性。</p>
+<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><p>在Objective-C 中，类的头文件应该尽可能少地引入其他类的头文件。你可以通过 class 关键字来声明，然后在实现文件里引入需要的其他类的头文件。<br>对于继承和遵循协议的情况，无法避免引入其他类的头文件，所以你在代码设计时还是要尽量减少继承，特别是继承关系太多时不利于代码的维护和修改，比如说修改父类时还需要考虑对所有子类的影响，如果评估不全，影响就难以控制。</p>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p>在写分类时，分类里增加的方法名要尽量加上前缀，而如果是系统自带类的分类的话，方法名就一定要加上前缀，来避免方法名重复的问题。<br>分类的作用如其名，就是对类做分类用的，所以我建议，能够把一个类里的公共方法放到不同的分类里， 便于管理维护。分类特别适合多人负责同一个类时，根据不同分类来进行各自不同功能的代码维护。</p>
+<h1 id="Code-review"><a href="#Code-review" class="headerlink" title="Code review"></a>Code review</h1><p>除此之外，你还可以参考其他公司对 iOS 开发制定的 编码规范来完善自己团队的编码规范，比如 <a href="https://github.com/spotify/ios-style">Spotify</a> 的 Objective-C 编码规范、<a href="https://github.com/NYTimes/objective-c-style-guide">纽约时报</a>的 Objective-C 的编 码规范、<a href="https://github.com/raywenderlich/objective-c-style-guide">Raywenderlich</a> 的 Objective-C 编码规范、<a href="https://github.com/raywenderlich/swift-style-guide">Raywenderlich</a> 的 Swift 编码规范。<br>在我看来，好的代码规范首先要保证代码逻辑清晰，然后再考虑简洁、扩展、重用等问题。逻辑清晰的代码 几乎不需要注释来说明，通过命名和清晰地编写逻辑就能够让其他人快速读懂。</p>
+<p><strong>不需要注释就能轻松读懂的代码，使用的语言特性也必然是通用和经典的，过新的语言特性和黑魔法不利于代码逻辑的阅读，应该减少使用，即使使用也需要多加注释，避免他人无法理解。</strong></p>
+<p>当你制定出好的代码规范后，就需要考虑如何将代码规范落地执行了。代码规范落地最好的方式就是 Code Review 。通过Code Review ，可以去检查代码规范是否被团队成员执行，同时还可以在Code Revie 时，及时指导代码编写不规范的同学。</p>
+<h2 id="怎么做Code-Review会比较好呢"><a href="#怎么做Code-Review会比较好呢" class="headerlink" title="怎么做Code Review会比较好呢?"></a>怎么做Code Review会比较好呢?</h2><p>首先，我觉得要利用好 Code Review 这个卡点，先使用静态检查工具对提交的代码进行一次全面检查。</p>
+<p>如果是 Swift 语言的话，你可以使用 <a href="https://github.com/realm/SwiftLint">SwiftLint</a>工具来检查代码规范。Swift 通过 Hook Clang 和 SourceKit 中 AST 的回调来检查源代码，如何使用SourceKit 开发工具可以参看这篇文章<a href="https://www.jpsim.com/uncovering-sourcekit/" target="_blank" rel="noopener">Uncovering SourceKit</a>。</p>
+<p>SwiftLint 检查的默认规则，你可以参考它的规则说明。SwiftLint 也支持自定义检查规则，支持你添加自己 制定的代码规范。你可以在 SwiftLint 目录下添加一个 .swiftlint.yml 配置文件来自定义基于正则表达式的自 定义规则。具体方法，你可以参看官方定义<a href="https://github.com/realm/SwiftLint/blob/master/README_CN.md">自定义规则的说明</a>。</p>
+<p>如果你是使用 Objective-C 语言开发的话，可以使用 OCLint 来做代码规范检查。关于 OCLint 如何定制自己的代码规范检查，你可以参看杨萧玉的这篇博文“<a href="http://yulingtianxia.com/blog/2019/01/27/MVVM-Rules-for-OCLint/" target="_blank" rel="noopener">使用 OCLint 自定义 MVVM 规则</a>”。</p>
+<p>然后，进行<strong>人工检查</strong>。</p>
+<p>人工检查，就是使用类似 Phabricator 这样的Code Review工具平台，来分配人员审核提交代码，审核完代码后，审核人可以进行通过、打回、评论等操作。这里需要注意的是，人工检查最容易沦为形式主义，因此为了避免团队成员人工检查成为形式，在开始阶段最好能让团队中编码习惯好、喜欢交流的人来做审核人， 以起到良好的示范作用，并以此作为后续的执行标准。</p>
+<p>你可能会有疑问，既然工具可以检查代码规范，为什么还需要人工再检查一遍?我想说的是，工具确实可以 通过不断完善，甚至引入 AI 分析来提高检查结果的准确性，但是我认为 Code Review 之所以最终还是需要人工检查的原因是，<strong>通过团队成员之间互相检查代码的方式，希望能够达到相互沟通交流，甚至相互学习的效果</strong>。</p>
+<p>试想一下，如果经过了大量的思考，花费了很多心思写出来一段自认为完美的代码，这时候可以再得到团队其他成员的鼓励，是不是会干劲儿十足呢。相反地，如果你马虎大意，或者经验不足而写出了不好的代码，通过 Code Review 而得到了团队其他成员的建议和指导，是不是能够让你的编码水平快速提高，同时还能够吸纳更多人的经验。</p>
+<p>Code Review 的过程也能够对代码规范进行迭代改进，最后形成一份能体现出团队整体智慧的代码规范。以后再有新成员加入时，他们也能够快速达到团队整体的编码水平，这就好比一锅老汤，新食材放进来涮涮，很快就有了相同的味道。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/思考/" rel="tag"># 思考</a>
+          
+            <a href="/tags/代码规范/" rel="tag"># 代码规范</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/04/大项目，人员多，架构设计的思考/" rel="next" title="大项目，人员多，架构设计的思考">
+                <i class="fa fa-chevron-left"></i> 大项目，人员多，架构设计的思考
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avator.jpg" alt="yifeeeee">
+          <p class="site-author-name" itemprop="name">yifeeeee</p>
+           
+              <p class="site-description motion-element" itemprop="description">blog挂在GitHub上，速度有些慢，改天迁移到自己的服务器上</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/gokoo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3298504791" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#好的代码规范"><span class="nav-number">2.</span> <span class="nav-text">好的代码规范</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常量"><span class="nav-number">2.1.</span> <span class="nav-text">常量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">2.2.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性"><span class="nav-number">2.3.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件语句"><span class="nav-number">2.4.</span> <span class="nav-text">条件语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#循环语句"><span class="nav-number">2.5.</span> <span class="nav-text">循环语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">2.6.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类"><span class="nav-number">2.7.</span> <span class="nav-text">类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分类"><span class="nav-number">2.8.</span> <span class="nav-text">分类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code-review"><span class="nav-number">3.</span> <span class="nav-text">Code review</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#怎么做Code-Review会比较好呢"><span class="nav-number">3.1.</span> <span class="nav-text">怎么做Code Review会比较好呢?</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2013 - 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yifeeeee</span>
+</div>
+
+
+<div class="powered-by">
+   <a class="theme-link" href="https://hexo.io">Hexo</a> 
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://https-yifnot-com.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://github.com/gokoo/gokoo.github.io.git/2019/02/08/如何制订一套适合自己团队的iOS代码规范/';
+          this.page.identifier = '2019/02/08/如何制订一套适合自己团队的iOS代码规范/';
+          this.page.title = '关于制定团队iOS代码规范以及Code Review的思考';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-yifnot-com.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

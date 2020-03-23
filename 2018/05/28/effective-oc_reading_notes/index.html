@@ -121,7 +121,7 @@
 <meta property="og:site_name" content="翼飞">
 <meta property="og:description" content="本文只整理了对自己觉得有帮助的知识点 第一章 熟悉Objective-C了解OC的起源 OC使用“消息结构”是有Smalltalk演化而来 OC与函数调用的语言区别是“OC运行时代码由环境决定，函数语言由编译器决定”  多用类型常量，少用#define预处理指令 #define没有指定变量类型，最好使用static const [变量类型] [变量名] [变量值] 如果定义的常量要在全局使用在">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-17T13:16:05.900Z">
+<meta property="og:updated_time" content="2020-03-19T03:29:24.239Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="52 Special Ways to Improve Your iOS Programs 读书笔记">
 <meta name="twitter:description" content="本文只整理了对自己觉得有帮助的知识点 第一章 熟悉Objective-C了解OC的起源 OC使用“消息结构”是有Smalltalk演化而来 OC与函数调用的语言区别是“OC运行时代码由环境决定，函数语言由编译器决定”  多用类型常量，少用#define预处理指令 #define没有指定变量类型，最好使用static const [变量类型] [变量名] [变量值] 如果定义的常量要在全局使用在">
@@ -414,7 +414,8 @@
 <h3 id="枚举表示状态、选项、状态码"><a href="#枚举表示状态、选项、状态码" class="headerlink" title="枚举表示状态、选项、状态码"></a>枚举表示状态、选项、状态码</h3><ul>
 <li>枚举加switch表示不同状态，最好不要实现default方法，防止新加的switch分支漏掉实现方法</li>
 </ul>
-<h1 id="第二章-对象、消息、runtime"><a href="#第二章-对象、消息、runtime" class="headerlink" title="第二章 对象、消息、runtime"></a>第二章 对象、消息、runtime</h1><h3 id="理解”属性这一概念“"><a href="#理解”属性这一概念“" class="headerlink" title="理解”属性这一概念“"></a>理解”属性这一概念“</h3><ul>
+<h1 id="第二章-对象、消息、runtime"><a href="#第二章-对象、消息、runtime" class="headerlink" title="第二章 对象、消息、runtime"></a>第二章 对象、消息、runtime</h1><a id="more"></a>
+<h3 id="理解”属性这一概念“"><a href="#理解”属性这一概念“" class="headerlink" title="理解”属性这一概念“"></a>理解”属性这一概念“</h3><ul>
 <li>@property默认生成 setter和getter一对存取方法</li>
 <li>ABI(Application Binary Interface)：应用程序二进制接口</li>
 <li>@dynamic关键字告诉编译器不生成存取方法</li>
@@ -428,8 +429,9 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@property (nonatomic, getter=isOn) BOOL on;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>setter=&lt;”name”&gt; 指定set方法名（不常见）</p>
-<a id="more"></a>
-<h3 id="在对象内部尽量直接访问实例变量"><a href="#在对象内部尽量直接访问实例变量" class="headerlink" title="在对象内部尽量直接访问实例变量"></a>在对象内部尽量直接访问实例变量</h3></li>
+</li>
+</ul>
+<h3 id="在对象内部尽量直接访问实例变量"><a href="#在对象内部尽量直接访问实例变量" class="headerlink" title="在对象内部尽量直接访问实例变量"></a>在对象内部尽量直接访问实例变量</h3><ul>
 <li>直接访问实例变量比较快，但是不会触发KVO和懒加载（lazy loading）<h3 id="理解”对象等同性“（判断两个对象是不是相同的）"><a href="#理解”对象等同性“（判断两个对象是不是相同的）" class="headerlink" title="理解”对象等同性“（判断两个对象是不是相同的）"></a>理解”对象等同性“（判断两个对象是不是相同的）</h3></li>
 <li>isEqual 判断两个对象指针是不是在一块内存地址，是指同一个”人“</li>
 <li>hash 哈希值是判断两个对象是不是一样的东西，是指”两个一样的人，比方双胞胎“</li>
@@ -627,7 +629,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -638,7 +640,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -649,7 +651,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

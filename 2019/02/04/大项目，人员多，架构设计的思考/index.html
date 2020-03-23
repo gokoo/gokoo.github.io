@@ -1,0 +1,881 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="iOS,架构,思考,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="翼飞" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+
+
+<meta name="description" content="大项目、多人、多团队架构思考粒度模块划分问题 首先，项目规模变大之后，模块划分必须遵循一定的原则。如果模块划分不规范清晰，就很容易导致代码耦合严重的问题，进而加大重构的难度，主要表现在：  业务需求不断，业务开发不能停。重新划分模块的工作量越大成本越高，重构以及技术改进的需求难度也就越大 老业务代码年久失修，没有注释，修改起来需要重新梳理的逻辑关系就会越冗长复杂，耗时长  所以需要搞清楚模块的粒度">
+<meta name="keywords" content="iOS,架构,思考">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大项目，人员多，架构设计的思考">
+<meta property="og:url" content="https://github.com/gokoo/gokoo.github.io.git/2019/02/04/大项目，人员多，架构设计的思考/index.html">
+<meta property="og:site_name" content="翼飞">
+<meta property="og:description" content="大项目、多人、多团队架构思考粒度模块划分问题 首先，项目规模变大之后，模块划分必须遵循一定的原则。如果模块划分不规范清晰，就很容易导致代码耦合严重的问题，进而加大重构的难度，主要表现在：  业务需求不断，业务开发不能停。重新划分模块的工作量越大成本越高，重构以及技术改进的需求难度也就越大 老业务代码年久失修，没有注释，修改起来需要重新梳理的逻辑关系就会越冗长复杂，耗时长  所以需要搞清楚模块的粒度">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-23T00:18:57.932Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="大项目，人员多，架构设计的思考">
+<meta name="twitter:description" content="大项目、多人、多团队架构思考粒度模块划分问题 首先，项目规模变大之后，模块划分必须遵循一定的原则。如果模块划分不规范清晰，就很容易导致代码耦合严重的问题，进而加大重构的难度，主要表现在：  业务需求不断，业务开发不能停。重新划分模块的工作量越大成本越高，重构以及技术改进的需求难度也就越大 老业务代码年久失修，没有注释，修改起来需要重新梳理的逻辑关系就会越冗长复杂，耗时长  所以需要搞清楚模块的粒度">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://github.com/gokoo/gokoo.github.io.git/2019/02/04/大项目，人员多，架构设计的思考/">
+
+
+
+
+
+  <title>大项目，人员多，架构设计的思考 | 翼飞</title>
+  
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-101663260-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">翼飞</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://github.com/gokoo/gokoo.github.io.git/2019/02/04/大项目，人员多，架构设计的思考/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yifeeeee">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avator.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="翼飞">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">大项目，人员多，架构设计的思考</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">写于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-04T22:15:25+08:00">
+                2019-02-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/思考/" itemprop="url" rel="index">
+                    <span itemprop="name">思考</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/04/大项目，人员多，架构设计的思考/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/04/大项目，人员多，架构设计的思考/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="大项目、多人、多团队架构思考"><a href="#大项目、多人、多团队架构思考" class="headerlink" title="大项目、多人、多团队架构思考"></a>大项目、多人、多团队架构思考</h2><p><strong>粒度模块划</strong>分问题</p>
+<p><strong>首先</strong>，项目规模变大之后，模块划分必须遵循一定的原则。如果模块划分不规范清晰，就很容易导致代码耦合严重的问题，进而加大重构的难度，主要表现在：</p>
+<ul>
+<li>业务需求不断，业务开发不能停。重新划分模块的工作量越大成本越高，重构以及技术改进的需求难度也就越大</li>
+<li>老业务代码年久失修，没有注释，修改起来需要重新梳理的逻辑关系就会越冗长复杂，耗时长</li>
+</ul>
+<p><strong>所以</strong>需要搞清楚模块的<strong>粒度划分原则</strong>，定一个<strong>标准</strong>出来</p>
+<p>针对iOS这种面向对象编程开发模式来说，应该遵循以下五个原则，即是<strong>SOLID原则</strong></p>
+<ul>
+<li><strong>单一功能原则</strong>：对象功能要单一，不要在一个对象添加很多的功能</li>
+<li><strong>开闭原则</strong>：扩展是开放的，修改是封闭的</li>
+<li><strong>里式替换原则</strong>：子类对象是可以代替基类对象的</li>
+<li><strong>接口隔离原则</strong>：接口的用途要单一，不要在一个接口上根据不同的入参实现多个功能</li>
+<li><strong>依赖翻转原则</strong>：方法依赖应该抽象，不要依赖实例。<a id="more"></a>
+<strong>最后选择合适的粒度</strong>，大项目的模块粒度过大和过小都不合适</li>
+</ul>
+<p>其中，组件是可以组装的，独立的业务单元，具有高内聚低耦合的特性，是比较适中的粒度。iOS开发中的组件，不是单纯的UI控件，也不是一个Viewcontroller这种大UI功能的集合，一个粒度太小一个粒度又太大。<strong>iOS组件应该是包含UI控件、相关多个小功能的合集，是一种适中的粒度模块。</strong></p>
+<h3 id="组件逻辑关系的梳理和改造"><a href="#组件逻辑关系的梳理和改造" class="headerlink" title="组件逻辑关系的梳理和改造"></a>组件逻辑关系的梳理和改造</h3><p>组件解耦不是说要求每个组件之间都没有耦合，组件之间也需要由上下层的依赖关系，组件的上下关系梳理清楚了就会更容易维护和管理，我一般都会分为不超过三个层级；</p>
+<ul>
+<li>底层可以是与业务无关的基础组件，比如网络和储存之类；</li>
+<li>中间层组件一般是通用的业务组件，比如账号、埋点、支付等等；</li>
+<li>最上层是迭代的业务组件，更新频率最高。</li>
+</ul>
+<p>这样设计的三层结构，有利于多个团队分别开发和维护，团队A和B，开发的时候有通用的功能，账号，埋点和主页等等，也有各自的业务功能模块，这样每一个功能都是一个组件。</p>
+<p>如此新创建的团队C就能非常轻松地使用团队A和B开发的通用组件，团队之间新开发的组件也可以互相通用。</p>
+<h3 id="多团队之间如何分工"><a href="#多团队之间如何分工" class="headerlink" title="多团队之间如何分工"></a>多团队之间如何分工</h3><p>代码层面上可以通过组件化解决大项目和多人，多团队架构的问题，但是架构问题还涉及到人员结构的架构，或者当公司的APP多了之后，相应的团队就多了，进而需要<strong>一个合理的团队结构</strong>：</p>
+<ul>
+<li>首先，需要专门的基建团队，负责业务无关的基础功能 组件和业务通用业务组件的开发；</li>
+<li>然后每个业务都有一个专门的团队负责开发，业务可以按照耦合度来划分，耦合度最高的业务可以单独划分一个业务团队；</li>
+<li>基建团队人员应该是流动的，否则个部分之间隔阂度太高，分工边界过于明显，会可能出现基建团队埋头苦干，做得过多，做得不够或是功能不好用的问题，造成严重的资源浪费，这也是工作中会遇到的问题。</li>
+</ul>
+<h3 id="我眼中的好架构"><a href="#我眼中的好架构" class="headerlink" title="我眼中的好架构"></a>我眼中的好架构</h3><p>组件化是解决项目大，人员多的一种很好的手段，在任何的公司和团队里都没有歧义。组件间的关系协调却没有固定的标准，协调的优劣，成为了衡量架构优劣的一个基本标准。所以再实践中，一般分成了<strong>协议式和中间者</strong>两种架构的设计方案。</p>
+<p>协议式架构设计主要采用的是协议式编程的思路：在编译层面使用协议定义规范，实现在不同的地方从而实现达到分布式管理和维护组件的目的。这总方式也遵循了依赖翻转原则，是一种很好的面向对象变成的实践。</p>
+<p><strong>但是缺点有二：</strong></p>
+<ul>
+<li>由于协式编程缺少统一调度层，导致难集中管理，特别是项目规模变大，团队变多的情况下，架构管控会显得越来越重要；</li>
+<li>协议式编程接口的定义过于规范，从而使得架构灵活性能不高。当需要引入一个新的设计模式的时候会发现很难融入到现有的架构里面，缺乏架构的统一性。</li>
+</ul>
+<p>另一种常用的架构是中间者架构。它采用中间者统一管理的方式，进而控制APP的整个生命周期中间组件的调用关系。同时，iOS对于组件间扣得设计也需要保持一致性，方便中间者统一调用。</p>
+<p>拆分的组件都会依赖中间者，组件之间不存在互相依赖关系，所以组件之间 的通讯更容易管理了，中间者也能够轻松添加新的设计模式，使得架构更加容易扩展。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/架构/" rel="tag"># 架构</a>
+          
+            <a href="/tags/思考/" rel="tag"># 思考</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/06/pheatmap/" rel="next" title="R语言下的pheatmap绘制热图">
+                <i class="fa fa-chevron-left"></i> R语言下的pheatmap绘制热图
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/08/如何制订一套适合自己团队的iOS代码规范/" rel="prev" title="关于制定团队iOS代码规范以及Code Review的思考">
+                关于制定团队iOS代码规范以及Code Review的思考 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avator.jpg" alt="yifeeeee">
+          <p class="site-author-name" itemprop="name">yifeeeee</p>
+           
+              <p class="site-description motion-element" itemprop="description">blog挂在GitHub上，速度有些慢，改天迁移到自己的服务器上</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/gokoo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3298504791" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#大项目、多人、多团队架构思考"><span class="nav-number">1.</span> <span class="nav-text">大项目、多人、多团队架构思考</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组件逻辑关系的梳理和改造"><span class="nav-number">1.1.</span> <span class="nav-text">组件逻辑关系的梳理和改造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多团队之间如何分工"><span class="nav-number">1.2.</span> <span class="nav-text">多团队之间如何分工</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我眼中的好架构"><span class="nav-number">1.3.</span> <span class="nav-text">我眼中的好架构</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy;  2013 - 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yifeeeee</span>
+</div>
+
+
+<div class="powered-by">
+   <a class="theme-link" href="https://hexo.io">Hexo</a> 
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://https-yifnot-com.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://github.com/gokoo/gokoo.github.io.git/2019/02/04/大项目，人员多，架构设计的思考/';
+          this.page.identifier = '2019/02/04/大项目，人员多，架构设计的思考/';
+          this.page.title = '大项目，人员多，架构设计的思考';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-yifnot-com.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -121,7 +121,7 @@
 <meta property="og:site_name" content="翼飞">
 <meta property="og:description" content="简介&amp;lt;CoreSpotlight&amp;gt;是 iOS9 / Xcode7 提供的一组新的API来帮助你建立起你的应用中的索引。CoreSpotlight是用来处理用户数据要使用CoreSpotlight首先要在工程-&amp;gt;Build Phases-&amp;gt;Link Binary With Libraries-&amp;gt;搜索CoreSpotlight引入Framework 搜索结果的初始化以及添">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-17T13:16:05.900Z">
+<meta property="og:updated_time" content="2020-03-19T03:30:21.608Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CoreSpotlight 学习">
 <meta name="twitter:description" content="简介&amp;lt;CoreSpotlight&amp;gt;是 iOS9 / Xcode7 提供的一组新的API来帮助你建立起你的应用中的索引。CoreSpotlight是用来处理用户数据要使用CoreSpotlight首先要在工程-&amp;gt;Build Phases-&amp;gt;Link Binary With Libraries-&amp;gt;搜索CoreSpotlight引入Framework 搜索结果的初始化以及添">
@@ -406,7 +406,8 @@
 <h1 id="搜索结果的初始化以及添加"><a href="#搜索结果的初始化以及添加" class="headerlink" title="搜索结果的初始化以及添加"></a>搜索结果的初始化以及添加</h1><blockquote>
 <p><strong>CSSearchableItemAttributeSet</strong> ：声明CSSearchableItem包含的元数据。</p>
 </blockquote>
-<h4 id="CSSearchableItemAttributeSet-方法-点击此处查看效果"><a href="#CSSearchableItemAttributeSet-方法-点击此处查看效果" class="headerlink" title="CSSearchableItemAttributeSet 方法 点击此处查看效果"></a>CSSearchableItemAttributeSet 方法 <a href="http://e.hiphotos.baidu.com/image/pic/item/42166d224f4a20a42adfcc5c99529822730ed06c.jpg" target="_blank" rel="noopener">点击此处查看效果</a></h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*应用内搜索object，想搜索到多少种界面就要创建多少个set ，每个set都要对应一个item*/</span></span><br><span class="line">    CSSearchableItemAttributeSet *firstSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:<span class="string">@"firstSet"</span>];</span><br><span class="line"><span class="comment">//标题</span></span><br><span class="line">    firstSet.title = <span class="string">@"搜索结果1"</span>;</span><br><span class="line"><span class="comment">//详细描述</span></span><br><span class="line">    firstSet.contentDescription = <span class="string">@"这是spotlight第一条搜索结果"</span>;</span><br><span class="line"><span class="comment">//关键字，搜索索引  经测试长的字符串spotlight可以自动模糊搜索，所以关键词</span></span><br><span class="line">    <span class="built_in">NSArray</span> *firstSeachKey = @[<span class="string">@"CoreSpotlight"</span>,<span class="string">@"结果"</span>,<span class="string">@"测试"</span>,<span class="string">@"搜索"</span>];</span><br><span class="line">    firstSet.contactKeywords = firstSeachKey;</span><br><span class="line"><span class="comment">//缩略图</span></span><br><span class="line">    firstSet.thumbnailData = [<span class="built_in">NSData</span> dataWithContentsOfURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://static0.tuicool.com/profile/05fcaf20abfa_1479439428.jpg"</span>]];</span><br></pre></td></tr></table></figure>
+<h4 id="CSSearchableItemAttributeSet-方法-点击此处查看效果"><a href="#CSSearchableItemAttributeSet-方法-点击此处查看效果" class="headerlink" title="CSSearchableItemAttributeSet 方法 点击此处查看效果"></a>CSSearchableItemAttributeSet 方法 <a href="http://e.hiphotos.baidu.com/image/pic/item/42166d224f4a20a42adfcc5c99529822730ed06c.jpg" target="_blank" rel="noopener">点击此处查看效果</a></h4><a id="more"></a>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*应用内搜索object，想搜索到多少种界面就要创建多少个set ，每个set都要对应一个item*/</span></span><br><span class="line">    CSSearchableItemAttributeSet *firstSet = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:<span class="string">@"firstSet"</span>];</span><br><span class="line"><span class="comment">//标题</span></span><br><span class="line">    firstSet.title = <span class="string">@"搜索结果1"</span>;</span><br><span class="line"><span class="comment">//详细描述</span></span><br><span class="line">    firstSet.contentDescription = <span class="string">@"这是spotlight第一条搜索结果"</span>;</span><br><span class="line"><span class="comment">//关键字，搜索索引  经测试长的字符串spotlight可以自动模糊搜索，所以关键词</span></span><br><span class="line">    <span class="built_in">NSArray</span> *firstSeachKey = @[<span class="string">@"CoreSpotlight"</span>,<span class="string">@"结果"</span>,<span class="string">@"测试"</span>,<span class="string">@"搜索"</span>];</span><br><span class="line">    firstSet.contactKeywords = firstSeachKey;</span><br><span class="line"><span class="comment">//缩略图</span></span><br><span class="line">    firstSet.thumbnailData = [<span class="built_in">NSData</span> dataWithContentsOfURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://static0.tuicool.com/profile/05fcaf20abfa_1479439428.jpg"</span>]];</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p><strong>CSSearchableItem</strong> 是CSSearchableItemAttributeSet的内容</p>
 </blockquote>
@@ -415,7 +416,6 @@
 <p>CSSearchableIndex 将初始好的items加入到搜索数据源里</p>
 </blockquote>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[[CSSearchableIndex defaultSearchableIndex] indexSearchableItems:@[firstItem] completionHandler:^(<span class="built_in">NSError</span> * _Nullable error) &#123;</span><br><span class="line">        <span class="keyword">if</span> (error) &#123;</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"设置失败%@"</span>,error);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"设置成功"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;];</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
 <h1 id="用户点击搜索结果的交互"><a href="#用户点击搜索结果的交互" class="headerlink" title="用户点击搜索结果的交互"></a>用户点击搜索结果的交互</h1><blockquote>
 <p>类似remote消息，在”AppDelegate.m”里面实现以下方法</p>
 </blockquote>
@@ -582,7 +582,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -593,7 +593,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -604,7 +604,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
